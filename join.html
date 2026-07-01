@@ -1,1 +1,37 @@
+←
+<
 
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Join Now</title><style>
+:root{--neon:#00ff88;}
+body{background:linear-gradient(180deg,#FFD700 0%,#B8860B 100%);min-height:100vh;margin:0;font-family:Inter,sans-serif;color:var(--neon);display:grid;place-items:center;padding:24px}
+.box{background:rgba(0,0,0,.6);border:2px solid var(--neon);box-shadow:0 0 30px var(--neon);border-radius:24px;padding:28px;max-width:420px;width:100%}
+h1{text-shadow:0 0 20px var(--neon);margin-bottom:12px;text-align:center}
+input,button{width:100%;padding:12px;margin-top:10px;border-radius:10px;border:1px solid var(--neon);background:#000;color:var(--neon);box-shadow:0 0 10px var(--neon);font-size:15px}
+button{cursor:pointer;font-weight:700}
+a{color:var(--neon);text-shadow:0 0 10px var(--neon);text-decoration:none;border:1px solid var(--neon);padding:8px 14px;border-radius:10px;display:inline-block;margin-top:12px}
+#msg{margin-top:8px;text-align:center}
+</style></head><body>
+<div class="box">
+  <h1>Join Now</h1>
+  <form id="f">
+    <input name="name" placeholder="Full Name" required>
+    <input name="number" placeholder="Phone Number" required>
+    <input name="email" type="email" placeholder="Email" required>
+    <input name="country" placeholder="Country of Origin" required>
+    <button>Submit</button>
+  </form>
+  <p id="msg"></p>
+  <a href="index.html">← Back Home</a>
+</div>
+<script>
+// IMPORTANT: Change this URL to your backend URL after you deploy server.js
+const API_URL = 'http://localhost:3000'; 
+document.getElementById('f').onsubmit=async e=>{
+ e.preventDefault(); 
+ const res=await fetch(API_URL+'/api/join',{method:'POST',body:new FormData(e.target)});
+ document.getElementById('msg').textContent= res.ok ? 'Saved! ✅' : 'Error ❌';
+ if(res.ok) e.target.reset();
+}
+</script></body></html>
